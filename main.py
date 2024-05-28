@@ -1,4 +1,4 @@
-valid_password = False
+valid_password = False #this is a flag
 
 #until we get a valid password
 while not valid_password:
