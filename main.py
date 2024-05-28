@@ -1,4 +1,4 @@
-password = input("please set a new password")
+password = input("please set a new password :")
 special_character_check = "!" in password
 
 password_length_check = len(password) < 16
