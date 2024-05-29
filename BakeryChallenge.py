@@ -37,12 +37,12 @@ cinnamon_raisin_bread = {
 
 def calculate_total_cost(recipe, ingredient_costs):
     recipe_name = recipe["recipe_name"]
-    total_cost = 0
+    total_cost = 0 #starts total cost at zero
 
-    for ingredient,amount in recipe.items(): #iterates over recipe, ingrediant is the key, amount is the values
+    for ingredient,amount in recipe.items(): #iterates over recipe, ingrediant is the key, amount is the values. Uses all values
         if not ingredient == "recipe_name":  #ignore recipe name and use everything else
-            ingredient_cost = ingredient_costs[ingredient]  # pulls values from ingrediants cost with the ingrediant key
-            total_cost = total_cost + (ingredient_cost * amount) # total cost is equal to previous total cost plus next value times the amount
+            ingredient_cost = ingredient_costs[ingredient]  # equals the index of each key, so for each ingrediant 
+            total_cost = total_cost + (ingredient_cost * amount) # add previos total cost plus one times amount to get new cost
     print (f"total cost to make {recipe_name}: ${total_cost:.2f}") 
     return total_cost   #retuns final cost after iteration throught the dictionary
 
