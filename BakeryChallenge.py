@@ -36,29 +36,33 @@ cinnamon_raisin_bread = {
 }
 
 def calculate_total_cost(recipe, ingredient_costs):
-    recipe_name =recipe["recipe_name"]
+    recipe_name = recipe["recipe_name"]
     total_cost = 0
 
-    for ingredient,amount in recipe.items():
-        if not ingredient == "recipe_name":
-            ingredient_cost = ingredient_costs[ingredient]
-            total_cost = total_cost +(ingredient_cost * amount)
-    print (f"total cost to make {recipe_name}: ${total_cost:.2f}")
-    return total_cost   
-
-calculate_total_cost(dinner_rolls_recipe)
-
-total_cost = calculate_total_cost(dinner_rolls_recipe, ingredient_costs)
+    for ingredient,amount in recipe.items(): #iterates over recipe, ingrediant is the key, amount is the values
+        if not ingredient == "recipe_name":  #ignore recipe name and use everything else
+            ingredient_cost = ingredient_costs[ingredient]  # pulls values from ingrediants cost with the ingrediant key
+            total_cost = total_cost + (ingredient_cost * amount) # total cost is equal to previous total cost plus next value times the amount
+    print (f"total cost to make {recipe_name}: ${total_cost:.2f}") 
+    return total_cost   #retuns final cost after iteration throught the dictionary
 
 def change_price(ingredient_costs, ingredient_name, change_percent ):
     ## update the ingredient_costs dictionary
-    ingredient_costs[ingredient_name] = ingredient_costs[ingredient_name] * (1 + change_percent)
+    ingredient_costs[ingredient_name] = ingredient_costs[ingredient_name] * (1 + change_percent) #to change the value you must use the key in this case its the ingrediant name
 
 def change_all_prices(ingredient_costs, change_percent):
-    new_ingrediant_costs = ingredient_costs.copy
-    for ingrediant,cost in new_ingrediant_costs.items(): 
-        change_price(ingredient_costs,ingrediant, change_percent)  
-    return new_ingrediant_costs  
+    new_ingrediant_costs = ingredient_costs.copy() #copies ingredients prices into a new dictionary
+    
+    for ingrediant,cost in new_ingrediant_costs.items(): # ingrediant is the new key and cost is the new value
+        change_price(new_ingrediant_costs, ingrediant, change_percent) #call change all prices method
+      
+    return new_ingrediant_costs  #returns new prices
 
-markup20 = change_all_prices(ingredient_costs, 1.20)
-markup_total_cost
+markup_20 = change_all_prices(ingredient_costs, 1.20) 
+markdown_20 = change_all_prices(ingredient_costs, -0.20)
+
+total_cost = calculate_total_cost(dinner_rolls_recipe, ingredient_costs)
+markup_total_cost = calculate_total_cost(dinner_rolls_recipe, markup_20)
+markdown_total_cost = calculate_total_cost(dinner_rolls_recipe, markdown_20)
+
+
